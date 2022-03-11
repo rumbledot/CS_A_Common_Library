@@ -53,6 +53,19 @@ namespace A_Common_Library.Data
             return dt;
         }
 
+        public static DataTable NewColumn(this DataTable dt, string name, Type data_type, bool db_nullable =true, bool auto_increment = false)
+        {
+            DataColumn dt_column = new DataColumn();
+            dt_column.ColumnName = name;
+            dt_column.DataType = data_type;
+            dt_column.AllowDBNull = db_nullable;
+            dt_column.AutoIncrement = auto_increment;
+
+            dt.Columns.Add(dt_column);
+
+            return dt;
+        }
+
         // get a DataRow from a DataTable that has a cell with certain value
         public static DataRow GetRow<T>(this DataTable data, string field_name, T value)
         {
