@@ -43,7 +43,7 @@ namespace A_Common_Library.XML
         {
             XmlSerializer ser = new XmlSerializer(typeof(T));
 
-            using (StringReader reader = new StringReader(this.CleanXML(xml_string)))
+            using (StringReader reader = new StringReader(xml_string))
             {
                 return (T)ser.Deserialize(reader);
             }
@@ -51,7 +51,7 @@ namespace A_Common_Library.XML
 
         public DataSet XML_ToDataSet(string xml_string)
         {
-            StringReader reader = new StringReader(this.CleanXML(xml_string));
+            StringReader reader = new StringReader(xml_string);
 
             DataSet ds = new DataSet();
             ds.ReadXml(reader);
@@ -64,21 +64,6 @@ namespace A_Common_Library.XML
             DataSet ds = XML_ToDataSet(xml_string);
 
             return ds.Tables[0];
-        }
-
-        private string CleanXML(string xml_string)
-        {
-            while (xml_string.Contains("<field_values><row><label/><value/><selected/></row></field_values>"))
-            {
-                xml_string = xml_string.Replace("<field_values><row><label/><value/><selected/></row></field_values>", "<field_values/>");
-            }
-
-            while (xml_string.Contains("<field_values><row><label/><value>0.00</value><selected/></row></field_values>"))
-            {
-                xml_string = xml_string.Replace("<field_values><row><label/><value>0.00</value><selected/></row></field_values>", "<field_values/>");
-            }
-
-            return xml_string;
         }
 
         #region IDisposable Implementation

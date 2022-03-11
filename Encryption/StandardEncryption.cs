@@ -40,6 +40,8 @@ namespace A_Common_Library.Encryption
         #region Crypto Functions
         public string Encrypt(string Text)
         {
+            if (string.IsNullOrEmpty(Text)) return string.Empty;
+
             using (DESCryptoServiceProvider Crypto_Service = new DESCryptoServiceProvider())
             using (MemoryStream Memory_Stream = new MemoryStream())
             using (CryptoStream Crypto_Stream = new CryptoStream(Memory_Stream, Crypto_Service.CreateEncryptor(keys[0], keys[1]), CryptoStreamMode.Write))
@@ -58,6 +60,8 @@ namespace A_Common_Library.Encryption
 
         public string Decrypt(string Text)
         {
+            if (string.IsNullOrEmpty(Text)) return string.Empty;
+
             using (DESCryptoServiceProvider Crypto_Service = new DESCryptoServiceProvider())
             using (MemoryStream Memory_Stream = new MemoryStream())
             using (CryptoStream Crypto_Stream = new CryptoStream(Memory_Stream, Crypto_Service.CreateEncryptor(keys[0], keys[1]), CryptoStreamMode.Write))
@@ -76,6 +80,8 @@ namespace A_Common_Library.Encryption
 
         public string Encrypt_Legacy(string Text)
         {
+            if (string.IsNullOrEmpty(Text)) return string.Empty;
+
             using (DESCryptoServiceProvider Crypto_Service = new DESCryptoServiceProvider())
             using (MemoryStream Memory_Stream = new MemoryStream())
             using (CryptoStream Crypto_Stream = new CryptoStream(Memory_Stream, Crypto_Service.CreateEncryptor(this.salt, this.IV), CryptoStreamMode.Write))
@@ -94,6 +100,8 @@ namespace A_Common_Library.Encryption
 
         public string Decrypt_Legacy(string Text)
         {
+            if (string.IsNullOrEmpty(Text)) return string.Empty;
+
             using (DESCryptoServiceProvider Crypto_Service = new DESCryptoServiceProvider())
             using (MemoryStream Memory_Stream = new MemoryStream())
             using (CryptoStream Crypto_Stream = new CryptoStream(Memory_Stream, Crypto_Service.CreateEncryptor(this.salt, this.IV), CryptoStreamMode.Write))
